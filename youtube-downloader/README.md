@@ -1,185 +1,86 @@
 # YouTube Video Downloader
 
-A modern Next.js web application for downloading YouTube videos through share links.
+A modern, highly performant web application for downloading YouTube videos seamlessly. This project leverages the robust Next.js 15 framework and React 19, offering an elegant user interface to fetch video metadata and download files directly to your device. It utilizes the industry standard yt-dlp backend to bypass common restrictions and ensure reliable media extraction.
 
 ## Features
 
-- Clean and modern UI with gradient background
-- Paste YouTube URL to fetch video information
-- View video details (title, thumbnail, duration, author)
-- Download videos in different quality options (highest/lowest)
-- Built with Next.js 15, React 19, TypeScript, and Tailwind CSS
-- Responsive design
-- Uses yt-dlp for reliable downloads
+- Modern UI/UX: A sleek interface built with Tailwind CSS, featuring gradient backgrounds, responsive design, and intuitive controls.
+- Broad Format Support: Download videos in a variety of resolutions from 360p up to 1080p Full HD, or extract audio exclusively as high-quality MP3.
+- Fast Video Processing: Paste your URL or utilize the built-in clipboard functionality to instantly fetch video information, including title, duration, author, and approximate file size.
+- Reliable Backend: Integrates seamlessly with yt-dlp to avoid frequent breakages associated with standard JavaScript download libraries.
+- Error Handling and Guidance: Detailed, user-friendly error messages and installation instructions if the backend dependencies are missing.
+- Temporary File Management: Efficiently streams and manages temporary data during the download process.
+
+## Technology Stack
+
+- Frontend: Next.js 15, React 19, Tailwind CSS
+- Language: TypeScript
+- Backend: Next.js API Routes, Node.js Child Processes, yt-dlp
 
 ## Prerequisites
 
-- Node.js 18+ installed on your system
-- npm or yarn package manager
-- **yt-dlp** installed (required for downloading videos)
+Before running this application, you must have the following installed on your local machine:
+- Node.js (version 18 or higher)
+- npm, yarn, or pnpm
+- yt-dlp (Critical for the backend to function)
 
-## Installing yt-dlp
+## Setup and Installation
 
-### Windows
+### 1. Clone the Repository
 
-**Option 1: Using pip (recommended)**
-```bash
-pip install yt-dlp
-```
+Clone the project to your local machine:
 
-**Option 2: Using Chocolatey**
-```bash
-choco install yt-dlp
-```
+git clone https://github.com/Dr-Rank1/Youtube.git
+cd Youtube/youtube-downloader
 
-**Option 3: Download binary**
-1. Download from: https://github.com/yt-dlp/yt-dlp/releases
-2. Rename to `yt-dlp.exe`
-3. Add to your PATH or place in project folder
+### 2. Install Dependencies
 
-### macOS
+Install the necessary Node.js packages using npm:
 
-```bash
-brew install yt-dlp
-```
-
-### Linux
-
-```bash
-# Using pip
-pip install yt-dlp
-
-# Or using apt (Ubuntu/Debian)
-sudo apt install yt-dlp
-```
-
-Verify installation:
-```bash
-yt-dlp --version
-```
-
-## Installation
-
-1. Navigate to the project directory:
-```bash
-cd youtube-downloader
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
 
-## Running the Application
+### 3. Install yt-dlp
 
-1. Start the development server:
-```bash
+This application relies on yt-dlp to handle the complex extraction processes required by YouTube.
+
+Windows:
+pip install yt-dlp
+Alternatively, you can use Chocolatey: choco install yt-dlp, or download the binary directly from the official yt-dlp releases page and add it to your PATH.
+
+macOS:
+brew install yt-dlp
+
+Linux:
+sudo apt install yt-dlp
+Or via pip: pip install yt-dlp
+
+Verify the installation by running:
+yt-dlp --version
+
+### 4. Running the Application
+
+To start the development server, run:
+
 npm run dev
-```
 
-2. Open your browser and navigate to:
-```
-http://localhost:3000
-```
+Open your browser and navigate to http://localhost:3000 to view the application.
 
-3. Paste a YouTube URL (e.g., `https://www.youtube.com/watch?v=dQw4w9WgXcQ`) and click "Get Video Info"
+## Usage Guide
 
-4. Once the video information is loaded, you can download the video in your preferred quality
-
-## Building for Production
-
-To create a production build:
-
-```bash
-npm run build
-npm start
-```
-
-## Technologies Used
-
-- **Next.js 15** - React framework with App Router
-- **React 19** - UI library
-- **TypeScript** - Type-safe JavaScript
-- **Tailwind CSS** - Utility-first CSS framework
-- **yt-dlp** - YouTube video downloader (backend)
-
-## Project Structure
-
-```
-youtube-downloader/
-├── app/
-│   ├── api/
-│   │   └── download/
-│   │       └── route.ts       # API endpoint using yt-dlp
-│   ├── globals.css            # Global styles with Tailwind
-│   ├── layout.tsx             # Root layout component
-│   └── page.tsx               # Main page with download UI
-├── temp/                      # Temporary download folder (auto-created)
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-├── postcss.config.mjs
-├── IMPORTANT_NOTE.md          # Info about YouTube download issues
-└── README.md
-```
-
-## How It Works
-
-1. **Frontend (app/page.tsx)**:
-   - User inputs YouTube URL
-   - Sends POST request to API to fetch video info
-   - Displays video details and download buttons
-   - Handles download by making GET request to API
-
-2. **Backend (app/api/download/route.ts)**:
-   - POST endpoint: Uses yt-dlp to fetch video metadata
-   - GET endpoint: Downloads video using yt-dlp and serves it
-   - Temporary files are cleaned up automatically
-
-## Important Notes
-
-- This application is for educational purposes only
-- Please respect YouTube's Terms of Service and copyright laws
-- **yt-dlp must be installed** for the app to work
-- Some videos may not be downloadable due to restrictions
-- Download speeds depend on your internet connection and YouTube's servers
-- Videos are temporarily stored in the `/temp` folder during download
+1. Find the video you want to download on YouTube and copy its URL.
+2. Open the application and paste the URL into the input field, or use the clipboard button.
+3. Click "Get Video Info" to fetch the video's details.
+4. Select your preferred download quality (ranging from 1080p to audio-only).
+5. Click the download button and wait for the file to be processed and saved to your device.
 
 ## Why yt-dlp?
 
-JavaScript libraries like `ytdl-core` and `@distube/ytdl-core` frequently break due to YouTube's anti-bot measures. `yt-dlp` is:
-- More reliable and actively maintained
-- Bypasses most YouTube restrictions
-- Regularly updated to handle YouTube changes
-- Industry standard for YouTube downloads
+Traditional Node.js YouTube libraries often break due to frequent anti-bot changes implemented by the platform. By wrapping yt-dlp, this application ensures maximum reliability, broader format support, and up-to-date extraction capabilities without requiring constant manual fixes to the codebase.
 
-See [IMPORTANT_NOTE.md](IMPORTANT_NOTE.md) for more details about YouTube download library issues.
+## Important Disclaimer
 
-## Troubleshooting
+This application is created for educational and personal use only. Users are expected to comply with YouTube's Terms of Service and all applicable copyright laws in their jurisdiction. 
 
-### "yt-dlp is not installed" error
+## Credits
 
-Install yt-dlp using one of the methods above and ensure it's in your system PATH.
-
-```bash
-# Test if yt-dlp is installed
-yt-dlp --version
-```
-
-### Other issues
-
-1. Make sure all dependencies are installed: `npm install`
-2. Check that you're using Node.js 18 or higher: `node --version`
-3. Clear Next.js cache: `rm -rf .next` and restart the dev server
-4. Some videos may be restricted - try a different video URL
-5. Make sure you have write permissions for the `/temp` folder
-
-### 403 Errors or "Sign in to confirm you're not a bot"
-
-This is YouTube blocking the request. yt-dlp handles this better than JavaScript libraries, but some videos may still be restricted. Try:
-- Using a different video
-- Updating yt-dlp: `pip install -U yt-dlp`
-
-## License
-
-This project is provided as-is for educational purposes.
+Created and maintained by Ian Gicheha Mbae / Dr-Rank1.
